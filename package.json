@@ -29,6 +29,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "prepare": "tsc -p tsconfig.json",
     "prepublishOnly": "rm -rf dist && npm run build",
     "typecheck": "tsc --noEmit"
   },
