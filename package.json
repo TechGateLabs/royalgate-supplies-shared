@@ -1,0 +1,38 @@
+{
+  "name": "@alabiemmanuel177/royalgate-shared",
+  "version": "0.1.0",
+  "description": "Shared enums, DTOs, realtime event types, and geography helpers for RoyalGate Supplies. Single source of truth — vendoring is not allowed.",
+  "license": "UNLICENSED",
+  "private": false,
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alabiemmanuel177/royalgate-supplies-shared.git"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "rm -rf dist && npm run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}
