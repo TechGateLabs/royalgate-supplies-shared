@@ -1,6 +1,6 @@
 {
-  "name": "@alabiemmanuel177/royalgate-shared",
-  "version": "0.1.0",
+  "name": "@techgatelabs/royalgate-shared",
+  "version": "1.0.0",
   "description": "Shared enums, DTOs, realtime event types, and geography helpers for RoyalGate Supplies. Single source of truth — vendoring is not allowed.",
   "license": "UNLICENSED",
   "private": false,
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alabiemmanuel177/royalgate-supplies-shared.git"
+    "url": "git+https://github.com/TechGateLabs/royalgate-supplies-shared.git"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
