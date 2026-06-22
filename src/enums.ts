@@ -22,7 +22,6 @@ export enum UserStatus {
 
 export enum AccountType {
   INDIVIDUAL = 'INDIVIDUAL',
-  RETAIL_SHOP = 'RETAIL_SHOP',
   BUSINESS = 'BUSINESS',
   FUEL_STATION = 'FUEL_STATION',
 }
