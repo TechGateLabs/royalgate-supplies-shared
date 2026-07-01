@@ -1,6 +1,6 @@
 {
   "name": "@techgatelabs/royalgate-shared",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Shared enums, DTOs, realtime event types, and geography helpers for RoyalGate Supplies. Single source of truth — vendoring is not allowed.",
   "license": "UNLICENSED",
   "private": false,
@@ -31,9 +31,11 @@
     "build": "tsc -p tsconfig.json",
     "prepare": "tsc -p tsconfig.json",
     "prepublishOnly": "rm -rf dist && npm run build",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "codegen": "openapi-typescript openapi.json -o src/api-types.ts"
   },
   "devDependencies": {
+    "openapi-typescript": "^7.13.0",
     "typescript": "^5.5.0"
   }
 }
