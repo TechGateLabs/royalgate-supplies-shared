@@ -2079,6 +2079,11 @@ export interface components {
         RegisterDto: {
             /** @description Reference token from BVN lookup step */
             bvn_reference: string;
+            /**
+             * @description 11-digit National Identification Number. Verified against the BVN name and required to open the buyer’s static bank account.
+             * @example 12345678901
+             */
+            nin: string;
             /** @example StrongP@ss1 */
             password: string;
             /**
