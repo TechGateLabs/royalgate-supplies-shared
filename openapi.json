@@ -7794,6 +7794,190 @@
         ]
       }
     },
+    "/api/v1/admin/buyers/{id}/pod-eligibility": {
+      "patch": {
+        "operationId": "AdminBuyerController_updatePodEligibility",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePodEligibilityDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiEnvelopeDto"
+                    },
+                    {
+                      "properties": {
+                        "success": {
+                          "example": true
+                        },
+                        "message": {
+                          "example": "Pay-on-Delivery eligibility updated"
+                        },
+                        "data": {
+                          "type": "object",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request failed validation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiErrorResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "code": {
+                          "example": "VALIDATION_ERROR"
+                        },
+                        "message": {
+                          "example": "Validation failed"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid bearer token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiErrorResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "code": {
+                          "example": "UNAUTHORIZED"
+                        },
+                        "message": {
+                          "example": "Unauthorized"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authenticated but lacking the required role.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiErrorResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "code": {
+                          "example": "FORBIDDEN"
+                        },
+                        "message": {
+                          "example": "Forbidden"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiErrorResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "code": {
+                          "example": "NOT_FOUND"
+                        },
+                        "message": {
+                          "example": "Buyer not found"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded (100/60s).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiErrorResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "code": {
+                          "example": "TOO_MANY_REQUESTS"
+                        },
+                        "message": {
+                          "example": "Too many requests"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Enable or disable Pay-on-Delivery for a buyer",
+        "tags": [
+          "Admin Buyers"
+        ]
+      }
+    },
     "/api/v1/admin/buyers/{id}/reject": {
       "patch": {
         "operationId": "AdminBuyerController_reject",
@@ -8341,6 +8525,190 @@
           }
         ],
         "summary": "Mark buyer for additional review",
+        "tags": [
+          "Admin Buyers"
+        ]
+      }
+    },
+    "/api/v1/admin/buyers/{id}/resolve-review": {
+      "patch": {
+        "operationId": "AdminBuyerController_resolveReview",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewBuyerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiEnvelopeDto"
+                    },
+                    {
+                      "properties": {
+                        "success": {
+                          "example": true
+                        },
+                        "message": {
+                          "example": "Buyer review resolved"
+                        },
+                        "data": {
+                          "type": "object",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request failed validation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiErrorResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "code": {
+                          "example": "VALIDATION_ERROR"
+                        },
+                        "message": {
+                          "example": "Validation failed"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid bearer token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiErrorResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "code": {
+                          "example": "UNAUTHORIZED"
+                        },
+                        "message": {
+                          "example": "Unauthorized"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authenticated but lacking the required role.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiErrorResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "code": {
+                          "example": "FORBIDDEN"
+                        },
+                        "message": {
+                          "example": "Forbidden"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiErrorResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "code": {
+                          "example": "NOT_FOUND"
+                        },
+                        "message": {
+                          "example": "Buyer not found"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded (100/60s).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiErrorResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "code": {
+                          "example": "TOO_MANY_REQUESTS"
+                        },
+                        "message": {
+                          "example": "Too many requests"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Clear a buyer from the flagged-account review queue",
         "tags": [
           "Admin Buyers"
         ]
@@ -21276,6 +21644,19 @@
         "required": [
           "email",
           "password"
+        ]
+      },
+      "UpdatePodEligibilityDto": {
+        "type": "object",
+        "properties": {
+          "pod_eligible": {
+            "type": "boolean",
+            "description": "Whether the buyer may place Pay-on-Delivery orders",
+            "example": true
+          }
+        },
+        "required": [
+          "pod_eligible"
         ]
       },
       "RejectBuyerDto": {

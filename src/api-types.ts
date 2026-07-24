@@ -948,6 +948,23 @@ export interface paths {
         patch: operations["AdminBuyerController_forceLogout"];
         trace?: never;
     };
+    "/api/v1/admin/buyers/{id}/pod-eligibility": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Enable or disable Pay-on-Delivery for a buyer */
+        patch: operations["AdminBuyerController_updatePodEligibility"];
+        trace?: never;
+    };
     "/api/v1/admin/buyers/{id}/reject": {
         parameters: {
             query?: never;
@@ -997,6 +1014,23 @@ export interface paths {
         head?: never;
         /** Mark buyer for additional review */
         patch: operations["AdminBuyerController_review"];
+        trace?: never;
+    };
+    "/api/v1/admin/buyers/{id}/resolve-review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Clear a buyer from the flagged-account review queue */
+        patch: operations["AdminBuyerController_resolveReview"];
         trace?: never;
     };
     "/api/v1/admin/buyers/{id}/suspend": {
@@ -3230,6 +3264,13 @@ export interface components {
             password: string;
             /** @description TOTP 6-digit code or 8-char backup code */
             totp_token?: string;
+        };
+        UpdatePodEligibilityDto: {
+            /**
+             * @description Whether the buyer may place Pay-on-Delivery orders
+             * @example true
+             */
+            pod_eligible: boolean;
         };
         RejectBuyerDto: {
             /** @description Reason for rejection */
@@ -8786,6 +8827,108 @@ export interface operations {
             };
         };
     };
+    AdminBuyerController_updatePodEligibility: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdatePodEligibilityDto"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiEnvelopeDto"] & {
+                        /** @example true */
+                        success?: unknown;
+                        /** @example Pay-on-Delivery eligibility updated */
+                        message?: unknown;
+                        data?: Record<string, never> | null;
+                    };
+                };
+            };
+            /** @description Request failed validation. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponseDto"] & {
+                        /** @example VALIDATION_ERROR */
+                        code?: unknown;
+                        /** @example Validation failed */
+                        message?: unknown;
+                    };
+                };
+            };
+            /** @description Missing or invalid bearer token. */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponseDto"] & {
+                        /** @example UNAUTHORIZED */
+                        code?: unknown;
+                        /** @example Unauthorized */
+                        message?: unknown;
+                    };
+                };
+            };
+            /** @description Authenticated but lacking the required role. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponseDto"] & {
+                        /** @example FORBIDDEN */
+                        code?: unknown;
+                        /** @example Forbidden */
+                        message?: unknown;
+                    };
+                };
+            };
+            /** @description Resource not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponseDto"] & {
+                        /** @example NOT_FOUND */
+                        code?: unknown;
+                        /** @example Buyer not found */
+                        message?: unknown;
+                    };
+                };
+            };
+            /** @description Rate limit exceeded (100/60s). */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponseDto"] & {
+                        /** @example TOO_MANY_REQUESTS */
+                        code?: unknown;
+                        /** @example Too many requests */
+                        message?: unknown;
+                    };
+                };
+            };
+        };
+    };
     AdminBuyerController_reject: {
         parameters: {
             query?: never;
@@ -9015,6 +9158,108 @@ export interface operations {
                         /** @example true */
                         success?: unknown;
                         /** @example Buyer marked for review */
+                        message?: unknown;
+                        data?: Record<string, never> | null;
+                    };
+                };
+            };
+            /** @description Request failed validation. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponseDto"] & {
+                        /** @example VALIDATION_ERROR */
+                        code?: unknown;
+                        /** @example Validation failed */
+                        message?: unknown;
+                    };
+                };
+            };
+            /** @description Missing or invalid bearer token. */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponseDto"] & {
+                        /** @example UNAUTHORIZED */
+                        code?: unknown;
+                        /** @example Unauthorized */
+                        message?: unknown;
+                    };
+                };
+            };
+            /** @description Authenticated but lacking the required role. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponseDto"] & {
+                        /** @example FORBIDDEN */
+                        code?: unknown;
+                        /** @example Forbidden */
+                        message?: unknown;
+                    };
+                };
+            };
+            /** @description Resource not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponseDto"] & {
+                        /** @example NOT_FOUND */
+                        code?: unknown;
+                        /** @example Buyer not found */
+                        message?: unknown;
+                    };
+                };
+            };
+            /** @description Rate limit exceeded (100/60s). */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponseDto"] & {
+                        /** @example TOO_MANY_REQUESTS */
+                        code?: unknown;
+                        /** @example Too many requests */
+                        message?: unknown;
+                    };
+                };
+            };
+        };
+    };
+    AdminBuyerController_resolveReview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReviewBuyerDto"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiEnvelopeDto"] & {
+                        /** @example true */
+                        success?: unknown;
+                        /** @example Buyer review resolved */
                         message?: unknown;
                         data?: Record<string, never> | null;
                     };

@@ -1,6 +1,6 @@
 {
   "name": "@techgatelabs/royalgate-shared",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Shared enums, DTOs, realtime event types, and geography helpers for RoyalGate Supplies. Single source of truth — vendoring is not allowed.",
   "license": "UNLICENSED",
   "private": false,
